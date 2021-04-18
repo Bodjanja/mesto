@@ -1,0 +1,25 @@
+.root {
+    padding: 45px 0 60px;
+    display: flex;
+    flex-direction: column;
+    margin: 0 auto;
+    background-color: black;
+    color: white;
+    font-family: 'Inter', Arial;
+    -webkit-text-size-adjust: 100%;
+    -ms-text-size-adjust: 100%;
+    -moz-text-size-adjust: 100%;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+}
+
+@media(max-width: 700px){
+    .root{
+        padding: 28px 0 36px;
+    }
+}
+
+/* div,img,footer,h1,h2,h3,p,button,header {
+    border: solid 1px red;
+} */

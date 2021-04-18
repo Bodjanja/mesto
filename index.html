@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mesto</title>
+    <link rel="stylesheet" href="./blocks/pages/index.css">
+</head>
+
+<body>
+    <div class="root">
+        <div class="root__container">
+            <header class="header header_position">
+                <a href="#"><img class="logo" src="./images/logo.svg" alt="Логотип"></a>
+            </header>
+
+            <main>
+                <section class="profile">
+                    <img class="profile__avatar" src="./images/image.png" alt="Кусто">
+                    <div class="profile__container">
+                        <div class="profile__subcontainer">
+                            <h1 class="profile__title">Жак-Ив Кусто</h1>
+                            <p class="profile__subtitle">Исследователь океана</p>
+                            <button class="profile__edition-button button-effects"></button>
+                        </div>
+                        <button class="profile__add-button button-effects"></button>
+                    </div>
+                </section>
+
+                <section>
+                    <ul class="elements">
+                        <li class="element">
+                            <img class="element__image" src="./images/kirill-pershin-1088404-unsplash.png"
+                                alt="Карачаевск">
+                            <div class="element__container">
+                                <h2 class="element__title">Карачаевск</h2>
+                                <button type="button" class="button-effects element__icon"></button>
+                            </div>
+                        </li>
+                        <li class="element">
+                            <img class="element__image" src="./images/kirill-pershin-1404681-unsplash.png"
+                                alt="Карачаевск">
+                            <div class="element__container">
+                                <h2 class="element__title">Гора Эльбрус</h2>
+                                <button type="button" class="button-effects element__icon"></button>
+                            </div>
+                        </li>
+                        <li class="element">
+                            <img class="element__image" src="./images/kirill-pershin-1556355-unsplash.png"
+                                alt="Карачаевск">
+                            <div class="element__container">
+                                <h2 class="element__title">Домбай</h2>
+                                <button type="button" class="button-effects element__icon"></button>
+                            </div>
+                        </li>
+                        <li class="element">
+                            <img class="element__image" src="./images/kirill-pershin-1404681-unsplash.png"
+                                alt="Карачаевск">
+                            <div class="element__container">
+                                <h2 class="element__title">Гора Эльбрус</h2>
+                                <button type="button" class="button-effects element__icon"></button>
+                            </div>
+                        </li>
+                        <li class="element">
+                            <img class="element__image" src="./images/kirill-pershin-1556355-unsplash.png"
+                                alt="Карачаевск">
+                            <div class="element__container">
+                                <h2 class="element__title">Домбай</h2>
+                                <button type="button" class="button-effects element__icon"></button>
+                            </div>
+                        </li>
+                        <li class="element">
+                            <img class="element__image" src="./images/kirill-pershin-1088404-unsplash.png"
+                                alt="Карачаевск">
+                            <div class="element__container">
+                                <h2 class="element__title">Карачаево-Черкессия</h2>
+                                <button type="button" class="button-effects element__icon"></button>
+                            </div>
+                        </li>
+                    </ul>
+                </section>
+            </main>
+
+            <footer class="footer">
+                &#169; 2020 Mesto Russia
+            </footer>
+
+        </div>
+        <div class="popup">
+            <div class="popup__container">
+                <h3 class="popup__title">Редактировать профиль</h3>
+                <form class="form">
+                    <fieldset class="form__item">
+                        <input name="name" type="text" class="form__input-name" value="">
+                        <div class="form__input-line"></div>
+                        <input name="description" type="text" value="" class="form__input-description">
+                        <div class="form__input-line"></div>
+
+                        <button type="submit" class="popup__submit-button" value="Save">Сохранить</button>
+                    </fieldset>
+                </form>
+                <button type="button" class="popup__close"></button>
+            </div>
+        </div>
+    </div>
+    <script src="./scripts/index.js"></script>
+</body>
+
+</html>
