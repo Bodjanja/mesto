@@ -23,7 +23,8 @@
     }
 }
 
-@media(max-width: 500px){
-    .profile__title{
+@media(max-width: 500px) {
+    .profile__title {
         max-width: 280px
     }
+}

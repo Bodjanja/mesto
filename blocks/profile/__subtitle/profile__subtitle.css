@@ -26,6 +26,6 @@
 
 @media(max-width: 500px){
     .profile__subtitle{
-        max-width: 280px
+        max-width: 280px;
     }
 }
