@@ -3,12 +3,13 @@
     height: 50px;
     background-image: url(../../../images/button.svg);
     background-repeat: no-repeat;
-    background-size: 16px 16px;
+    background-size: 22px 22px;
     background-position: center;
 }
 
 @media(max-width: 700px){
     .profile__add-button{
         width: 100%;
+        background-size: 16px 16px;
     }
 }

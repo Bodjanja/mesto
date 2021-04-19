@@ -5,14 +5,13 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mesto</title>
+    <title>Место</title>
     <link rel="stylesheet" href="./pages/index.css">
 </head>
 
-<body>
+<body class="page">
     <div class="root">
-        <div class="root__container">
-            <header class="header header_position">
+            <header class="header header_position_align">
                 <a href="#" target="_self"><img class="logo" src="./images/logo.svg" alt="Логотип"></a>
             </header>
 
@@ -23,20 +22,20 @@
                         <div class="profile__subcontainer">
                             <h1 class="profile__title">Жак-Ив Кусто</h1>
                             <p class="profile__subtitle">Исследователь океана</p>
-                            <button class="profile__edition-button button-effects"></button>
+                            <button type="button" aria-label="Отредактировать профиль" class="profile__edition-button button-effects"></button>
                         </div>
-                        <button class="profile__add-button button-effects"></button>
+                        <button type="button" aria-label="Добавить" class="profile__add-button button-effects"></button>
                     </div>
                 </section>
 
-                <section>
-                    <ul class="elements">
+                <section class="elements">
+                    <ul class="elements__list">
                         <li class="element">
                             <img class="element__image" src="./images/kirill-pershin-1088404-unsplash.png"
                                 alt="Карачаевск">
                             <div class="element__container">
                                 <h2 class="element__title">Карачаевск</h2>
-                                <button type="button" class="button-effects element__icon"></button>
+                                <button type="button" aria-label="Поставить лайк" class="element__icon"></button>
                             </div>
                         </li>
                         <li class="element">
@@ -44,7 +43,7 @@
                                 alt="Карачаевск">
                             <div class="element__container">
                                 <h2 class="element__title">Гора Эльбрус</h2>
-                                <button type="button" class="button-effects element__icon"></button>
+                                <button type="button" aria-label="Поставить лайк" class="element__icon"></button>
                             </div>
                         </li>
                         <li class="element">
@@ -52,7 +51,7 @@
                                 alt="Карачаевск">
                             <div class="element__container">
                                 <h2 class="element__title">Домбай</h2>
-                                <button type="button" class="button-effects element__icon"></button>
+                                <button type="button" aria-label="Поставить лайк" class="element__icon"></button>
                             </div>
                         </li>
                         <li class="element">
@@ -60,7 +59,7 @@
                                 alt="Карачаевск">
                             <div class="element__container">
                                 <h2 class="element__title">Гора Эльбрус</h2>
-                                <button type="button" class="button-effects element__icon"></button>
+                                <button type="button" aria-label="Поставить лайк" class="element__icon"></button>
                             </div>
                         </li>
                         <li class="element">
@@ -68,7 +67,7 @@
                                 alt="Карачаевск">
                             <div class="element__container">
                                 <h2 class="element__title">Домбай</h2>
-                                <button type="button" class="button-effects element__icon"></button>
+                                <button type="button" aria-label="Поставить лайк" class="element__icon"></button>
                             </div>
                         </li>
                         <li class="element">
@@ -76,7 +75,7 @@
                                 alt="Карачаевск">
                             <div class="element__container">
                                 <h2 class="element__title">Карачаево-Черкессия</h2>
-                                <button type="button" class="button-effects element__icon"></button>
+                                <button type="button" aria-label="Поставить лайк" class="element__icon"></button>
                             </div>
                         </li>
                     </ul>
@@ -84,26 +83,23 @@
             </main>
 
             <footer class="footer">
-                &#169; 2020 Mesto Russia
+                <p class="footer__content">&#169; 2020 Mesto Russia</p>
             </footer>
 
         </div>
         <div class="popup">
             <div class="popup__container">
-                <h3 class="popup__title">Редактировать профиль</h3>
-                <form class="form">
+                <h2 class="popup__title">Редактировать профиль</h2>
+                <form name="editionform" class="form">
                     <fieldset class="form__item">
-                        <input name="name" type="text" class="form__input-name" value="">
-                        <div class="form__input-line"></div>
-                        <input name="description" type="text" value="" class="form__input-description">
-                        <div class="form__input-line"></div>
+                        <input name="name" type="text" class="form__input-name" value="" required placeholder="Введите имя">
+                        <input name="description" type="text" value="" class="form__input-description" required placeholder="Введите описание">
 
                         <button type="submit" class="popup__submit-button" value="Save">Сохранить</button>
                     </fieldset>
                 </form>
-                <button type="button" class="popup__close"></button>
+                <button type="button" aria-label="Закрыть редактирование" class="popup__close"></button>
             </div>
-        </div>
     </div>
     <script src="./scripts/index.js"></script>
 </body>

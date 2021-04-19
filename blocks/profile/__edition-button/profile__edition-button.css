@@ -16,6 +16,9 @@
 
 @media(max-width: 700px){
     .profile__edition-button{
+        width: 18px;
+        height: 18px;
         padding: 5px;
+        background-size: 7.5px 7.5px;
     }
 }

@@ -1,4 +1,4 @@
-.element__icon{
+.element__icon {
     margin: 0;
     padding: 0;
     font-size: 0;
@@ -14,7 +14,11 @@
     border: 2px solid #FFFFFF;
 }
 
-.element__icon:active{
-background-image: url(../../../images/like_active.svg);
-opacity: 1;  
+.element__icon:hover {
+    opacity: 0.5;
+}
+
+.element__icon:active {
+    background-image: url(../../../images/like_active.svg);
+    opacity: 1;
 }
