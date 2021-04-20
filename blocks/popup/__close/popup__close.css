@@ -1,28 +1,35 @@
-.popup__close{
+.popup__close {
     margin: 0;
     padding: 0;
     width: 40px;
     height: 40px;
     position: absolute;
-    top: -35px;
-    right: -35px;
+    top: -40px;
+    right: -40px;
     background-color: transparent;
     background-image: url(../../../images/CloseIcon.svg);
-    background-size: 40px 40px;
+    background-size: auto;
     background-repeat: no-repeat;
     background-position: center;
     border: none;
     cursor: pointer;
     outline: none;
+    transition: opacity 0.3s linear;
     transition: transform 0.3s linear;
 }
 
-@media(max-width: 700px){
-    .popup__close{
-        width: 26px;
-        height: 26px;
-        top: -33px;
+.popup__close:hover {
+    opacity: 0.6;
+    transform: rotate(-45deg);
+    /* В макете указаны эти свойства, а transition я выбрал сам. Буду благодарен, если подробнее напишите в чём заключается ошибка */
+}
+
+@media(max-width: 700px) {
+    .popup__close {
+        width: 36px;
+        height: 36px;
+        top: -49px;
         right: 0px;
-        background-size: 26px 26px;
+        background-size: cover;
     }
 }

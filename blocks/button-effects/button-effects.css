@@ -7,8 +7,6 @@
     transition: opacity 0.2s linear;
     outline: none;
     box-sizing: border-box;
-    border: 2px solid #FFFFFF;
-}
 
 .button-effects:hover{
     opacity: 0.6;

@@ -19,6 +19,6 @@
 
 @media(max-width: 500px){
     .root{
-        width: calc(100% - 28px);
+        width: 100%;
     }
 }

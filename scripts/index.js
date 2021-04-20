@@ -5,8 +5,8 @@ let closePopUpButton = document.querySelector('.popup__close')
 let form = document.querySelector('.form');
 let namea = document.querySelector('.profile__title');
 let description = document.querySelector('.profile__subtitle');
-let popupName = document.querySelector('.form__input-name');
-let popupDescription = document.querySelector('.form__input-description');
+let popupName = document.querySelector('.form_line_name');
+let popupDescription = document.querySelector('.form_line_description');
 
 //Объявление функций
 function openPopup() {
@@ -19,10 +19,10 @@ function formSubmitHandler(evt) {
     evt.preventDefault();
     namea.textContent = popupName.value;
     description.textContent = popupDescription.value;
-    removePopup();
+    hidePopup();
 }
 
-function removePopup() {
+function hidePopup() {
     popup.classList.remove('popup_opened')
 }
 
@@ -30,11 +30,11 @@ function removePopup() {
 openPopUpButton.addEventListener('click', openPopup)
 
 // Закрытие попапа
-closePopUpButton.addEventListener('click', removePopup)
+closePopUpButton.addEventListener('click', hidePopup)
 
 // popup.addEventListener('click', function (event) {
 //     if (event.target === event.currentTarget) {
-//         removePopup()
+//         hidePopup()
 //     }
 // })
 
