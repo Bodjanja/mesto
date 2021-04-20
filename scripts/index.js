@@ -5,8 +5,8 @@ let closePopUpButton = document.querySelector('.popup__close')
 let form = document.querySelector('.form');
 let namea = document.querySelector('.profile__title');
 let description = document.querySelector('.profile__subtitle');
-let popupName = document.querySelector('.form_input-info_name');
-let popupDescription = document.querySelector('.form_input-info_description');
+let popupName = document.querySelector('.form__input-info_name');
+let popupDescription = document.querySelector('.form__input-info_description');
 
 //Объявление функций
 function openPopup() {
