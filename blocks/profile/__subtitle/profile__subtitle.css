@@ -11,15 +11,15 @@
     white-space: nowrap;
 }
 
-@media(max-width: 850px){
+@media(max-width: 900px){
     .profile__subtitle{
-        max-width: 400px;
+        max-width: 390px;
     }
 }
 
 @media(max-width: 785px){
     .profile__subtitle{
-        max-width: 320px;
+        max-width: 310px;
     }
 }
 

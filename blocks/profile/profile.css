@@ -10,5 +10,6 @@
     .profile{
         flex-wrap: wrap;
         flex-direction: column;
+        padding-bottom: 36px;
     }
 }
