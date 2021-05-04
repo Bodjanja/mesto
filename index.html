@@ -20,8 +20,8 @@
                 <img class="profile__avatar" src="./images/image.png" alt="Кусто">
                 <div class="profile__container">
                     <div class="profile__subcontainer">
-                        <h1 class="profile__title">Жак-Ив Кусто</h1>
-                        <p class="profile__subtitle">Исследователь океана</p>
+                        <h1 class="profile__title">Фёдор Конюхов</h1>
+                        <p class="profile__subtitle">Русский путешественник-исследователь</p>
                         <button type="button" aria-label="Отредактировать профиль"
                             class="profile__edition-button button-effects"></button>
                     </div>
@@ -32,20 +32,6 @@
 
             <section class="elements">
                 <ul class="elements__list">
-                   
-                    <template id="template-element">
-                        <li class="element">
-                            <img class="element__image" src="null" alt="Картинка места">
-                            <div class="element__container">
-                                <h2 class="element__title"></h2>
-                                <button type="button" aria-label="Поставить лайк" class="element__icon"></button>
-                            </div>
-                            <button type="button" aria-label="Удалить карточку" id="removebutton" class="element__bin button-effects">
-                                <div class="element__bin-part-one"></div>
-                                <div class="element__bin-part"></div>
-                            </button>
-                        </li>
-                    </template>
                 </ul>
             </section>
         </main>
@@ -53,6 +39,18 @@
         <footer class="footer">
             <p class="footer__content">&#169; 2020 Mesto Russia</p>
         </footer>
+
+        <template id="template-element">
+            <li class="element">
+                <img class="element__image" src="" alt="">
+                <div class="element__container">
+                    <h2 class="element__title"></h2>
+                    <button type="button" aria-label="Поставить лайк" class="element__icon"></button>
+                </div>
+                <button type="button" aria-label="Удалить карточку" id="removebutton"
+                    class="element__bin button-effects"></button>
+            </li>
+        </template>
 
     </div>
     <div class="popup">
@@ -73,27 +71,31 @@
             <button type="button" aria-label="Закрыть редактирование" class="popup__close"></button>
         </div>
     </div>
-    <div class="addition-popup">
-        <div class="addition-popup__container">
-            <h2 class="addition-popup__title">Новое место</h2>
-            <form class="form addition-popup__form" name="additionform">
-                <fieldset class="addition-popup__item">
-                    <input name="additionName" class="form__input-info form__input-info_type_place" type="text" value="" placeholder="Название" required>
-                    <input name="additionPhoto" class="form__input-info form__input-info_type_image" type="url" value="" placeholder="Ссылка на картинку" required>
-                    <button class="addition-popup__submit-button" type="submit" value="add"
+    <div class="popup popup_addition">
+        <div class="popup__container">
+            <h2 class="popup__title">Новое место</h2>
+            <form class="form form_addition" name="additionform">
+                <fieldset class="form__item">
+                    <input name="additionName" class="form__input-info form__input-info_type_place" type="text" value=""
+                        placeholder="Название" required>
+                    <input name="additionPhoto" class="form__input-info form__input-info_type_image" type="url" value=""
+                        placeholder="Ссылка на картинку" required>
+                    <button class="popup__submit-button popup__submit-button_addition" type="submit" value="add"
                         aria-label="Добавить новую информацию с местом">Создать</button>
                 </fieldset>
             </form>
-            <button type="button" aria-label="Закрыть редактирование" class="addition-popup__close"></button>
+            <button type="button" aria-label="Закрыть редактирование"
+                class="popup__close popup__close_addition"></button>
         </div>
     </div>
-    <div class="photo-popup">
-        <div class="photo-popup__container">
-            <figure class="photo-popup__figure"><img class="photo-popup__image" src="null" alt="Картинка места">
-            <figcaption class="photo-popup__caption"></figcaption></figure>
-            <button type="button" aria-label="Закрыть картинку" class="photo-popup__close"></button>
+    <div class="popup popup_photo">
+        <div class="popup__figurecaption">
+            <img class="popup__image" src="" alt="">
+            <p class="popup__caption"></p>
+            <button type="button" aria-label="Закрыть картинку" class="popup__close popup__close_photo"></button>
         </div>
     </div>
+    <script src="./scripts/initialcardsmassive.js"></script>
     <script src="./scripts/index.js"></script>
 </body>
 

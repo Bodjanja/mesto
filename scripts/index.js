@@ -8,71 +8,22 @@ const description = document.querySelector('.profile__subtitle');
 const popupName = document.querySelector('.form__input-info_type_name');
 const popupDescription = document.querySelector('.form__input-info_type_description');
 
-const additionPopup = document.querySelector('.addition-popup');
-const additionForm = document.querySelector('.addition-popup__form');
+const additionPopup = document.querySelector('.popup_addition');
+const additionForm = document.querySelector('.form_addition');
 const additionPopupOpenButton = document.querySelector('.profile__add-button');
-const closeAdditionPopup = document.querySelector('.addition-popup__close');
-const newPlaceSaveButton = document.querySelector('.addition-popup__submit-button');
+const closeAdditionPopup = document.querySelector('.popup__close_addition');
+const newPlaceSaveButton = document.querySelector('.popup__submit-button_addition');
 const newPlaceName = document.querySelector('.form__input-info_type_place');
 const newPlaceImage = document.querySelector('.form__input-info_type_image');
 
-const photoPopup = document.querySelector('.photo-popup');
+const photoPopup = document.querySelector('.popup_photo');
 
-//Начальный массив карточек
-const initialCards = [{
-    name: 'Москва',
-    link: 'https://images.unsplash.com/photo-1615225150799-524453b31447?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80'
-  },
-  {
-    name: 'Санкт-Петербург',
-    link: 'https://images.unsplash.com/photo-1615529489302-e5e8d9f72ce8?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80'
-  },
-  {
-    name: 'Карелия',
-    link: 'https://images.unsplash.com/photo-1615529610458-1801dfce0a6f?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&q=80'
-  },
-  {
-    name: 'Архангельск',
-    link: 'https://images.unsplash.com/photo-1615727463673-b5cc6d117728?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&q=80'
-  },
-  {
-    name: 'Камчатка',
-    link: 'https://images.unsplash.com/photo-1578589318274-02854f68813e?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80'
-  },
-  {
-    name: 'Карачаево-Черкессия',
-    link: 'https://images.unsplash.com/photo-1577599302940-df8eadaaebad?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80'
-  }
-];
 const template = document.querySelector('#template-element').content;
 const container = document.querySelector('.elements__list');
 
-const photoCloseButton = document.querySelector('.photo-popup__close');
-const popupPhotoSrc = document.querySelector('.photo-popup__image')
-const popupText = document.querySelector('.photo-popup__caption')
-
-// Добавление карточек на страницу из массива
-initialCards.forEach(function (card){
-  const item = template.querySelector('.element').cloneNode(true);
-  const cardRemoveButton = item.querySelector('#removebutton');
-  const likeIcon = item.querySelector('.element__icon');
-  const wideImage = item.querySelector('.element__image');
-
-  item.querySelector('.element__image').src = card.link;
-  item.querySelector('.element__title').textContent = card.name;
-  container.append(item);
-
-  cardRemoveButton.addEventListener('click', function removeElement(evt){
-    evt.target.closest('.element').remove();
-  })//Удалить карточку
-
-  likeIcon.addEventListener('click', function () {
-    likeIcon.classList.toggle('element__icon_liked')
-  })//Поставить "Нравится"
-
-  wideImage.addEventListener('click', fullSizeImgHandler)//Синхронизация картинки и подписи при попапе
-  
-})
+const photoCloseButton = document.querySelector('.popup__close_photo');
+const popupPhotoSrc = document.querySelector('.popup__image')
+const popupText = document.querySelector('.popup__caption')
 
 // -----------------------------------------------------------------------------------------------------
 //Объявление функций
@@ -110,37 +61,50 @@ function formSubmitHandler(evt) {
 }
 
 //Функция открытия попапа с большим разрешением картинок
-function fullSizeImgHandler(evt){
+function fullSizeImgHandler(evt) {
   const textDom = evt.target.parentElement;
   const textSource = textDom.querySelector('.element__title')
-  
+
   popupPhotoSrc.src = evt.target.currentSrc
-  photoPopup.classList.add('popup_opened')
+  popupPhotoSrc.alt = textSource.textContent
   popupText.textContent = textSource.textContent
+  photoPopup.classList.add('popup_opened')
+}
+
+//Общая функция создания карточки + обвес слушателей
+function createCard(cardName, cardLink) {
+  const element = template.querySelector('.element').cloneNode(true);
+  const cardRemoveButton = element.querySelector('#removebutton');
+  const likeIcon = element.querySelector('.element__icon');
+  const wideImage = element.querySelector('.element__image');
+
+  element.querySelector('.element__image').src = cardLink;
+  element.querySelector('.element__title').textContent = cardName;
+  element.querySelector('.element__title').alt = cardName;
+
+  cardRemoveButton.addEventListener('click', function removeElement(evt) {
+    evt.target.closest('.element').remove();
+  }) //Удалить карточку
+
+  likeIcon.addEventListener('click', function () {
+    likeIcon.classList.toggle('element__icon_liked')
+  }) //Поставить "Нравится"
+
+  wideImage.addEventListener('click', fullSizeImgHandler) //Синхронизация картинки и подписи при попапе
+
+  return element
+}
+
+// Функция добавления элемента в разметку
+function addEl(item) {
+  container.prepend(item)
 }
 
 //Функция для добавления новых карточек в разметку
-function cardSubmitHandler(evt){
+function cardSubmitHandler(evt) {
   evt.preventDefault();
-  const item = template.querySelector('.element').cloneNode(true);
-  item.querySelector('.element__title').textContent = newPlaceName.value;
-  item.querySelector('.element__image').src = newPlaceImage.value;
-  container.prepend(item);
+  addEl(createCard(newPlaceName.value, newPlaceImage.value))
   hideAdditionPopup();
-
-  const cardRemoveButton = item.querySelector('#removebutton')
-  cardRemoveButton.addEventListener('click', function removeElement(evt){
-    evt.target.closest('.element').remove();
-  })
-
-  const likeIcon = item.querySelector('.element__icon')
-  likeIcon.addEventListener('click', function () {
-    likeIcon.classList.toggle('element__icon_liked')
-  })
-
-  const wideImage = item.querySelector('.element__image');
-  wideImage.addEventListener('click', fullSizeImgHandler)
-  
 }
 
 // -----------------------------------------------------------------------------------------------------
@@ -152,13 +116,13 @@ openPopUpButton.addEventListener('click', openPopup) //Редактирован�
 additionPopupOpenButton.addEventListener('click', openAdditionPopup) //Добавление картинок
 
 // Закрытие попапа
-closePopUpButton.addEventListener('click', hidePopup) //Редактирование профиля
+closePopUpButton.addEventListener('click', hidePopup) //Редактирования профиля
 
-closeAdditionPopup.addEventListener('click', hideAdditionPopup) //Добавление картинок
+closeAdditionPopup.addEventListener('click', hideAdditionPopup) //Добавления картинок
 
-photoCloseButton.addEventListener('click', function(){
+photoCloseButton.addEventListener('click', function () {
   photoPopup.classList.remove('popup_opened')
-})//Закрытие просмотра картинок в большом размере
+}) //Закрытие просмотра картинок в большом размере
 
 // popup.addEventListener('click', function (event) {
 //     if (event.target === event.currentTarget) {
@@ -169,5 +133,9 @@ photoCloseButton.addEventListener('click', function(){
 // Замена информации в полях профиля
 form.addEventListener('submit', formSubmitHandler)
 
-additionForm.addEventListener('submit', cardSubmitHandler)//Добавление новых карточек
+additionForm.addEventListener('submit', cardSubmitHandler) //Добавление новых карточек
 
+// Добавление карточек на страницу из массива
+initialCards.forEach((item) => {
+  addEl(createCard(item.name, item.link))
+})
