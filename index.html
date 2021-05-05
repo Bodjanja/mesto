@@ -72,29 +72,29 @@
             <button type="button" aria-label="Закрыть редактирование" class="popup__close"></button>
         </div>
     </div>
-    <div class="popup popup_addition">
+    <div class="popup popup_type_addition">
         <div class="popup__container">
             <h2 class="popup__title">Новое место</h2>
-            <form class="form form_addition" name="additionform">
+            <form class="form form_type_addition" name="additionform">
                 <fieldset class="form__item">
                     <input name="additionName" class="form__input-info form__input-info_type_place" type="text" value=""
                         placeholder="Название" required>
                     <input name="additionPhoto" class="form__input-info form__input-info_type_image" type="url" value=""
                         placeholder="Ссылка на картинку" required>
-                    <button class="popup__submit-button popup__submit-button_addition" type="submit" value="add"
+                    <button class="popup__submit-button popup__submit-button_type_addition" type="submit" value="add"
                         aria-label="Добавить новую информацию с местом">Создать</button>
                 </fieldset>
             </form>
             <button type="button" aria-label="Закрыть редактирование"
-                class="popup__close popup__close_addition"></button>
+                class="popup__close popup__close_type_addition"></button>
         </div>
     </div>
-    <div class="popup popup_photo">
+    <div class="popup popup_type_photo">
         <div class="popup__figurecaption">
             <!-- без null работа не проходит тестировщик яндекса -->
             <img class="popup__image" src="null" alt="Картинка места">
             <p class="popup__caption"></p>
-            <button type="button" aria-label="Закрыть картинку" class="popup__close popup__close_photo"></button>
+            <button type="button" aria-label="Закрыть картинку" class="popup__close popup__close_type_photo"></button>
         </div>
     </div>
     <script src="./scripts/initialcardsmassive.js"></script>

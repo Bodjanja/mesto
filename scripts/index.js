@@ -8,20 +8,20 @@ const description = document.querySelector('.profile__subtitle');
 const popupName = document.querySelector('.form__input-info_type_name');
 const popupDescription = document.querySelector('.form__input-info_type_description');
 
-const additionPopup = document.querySelector('.popup_addition');
-const additionForm = document.querySelector('.form_addition');
+const additionPopup = document.querySelector('.popup_type_addition');
+const additionForm = document.querySelector('.form_type_addition');
 const additionPopupOpenButton = document.querySelector('.profile__add-button');
-const closeAdditionPopup = document.querySelector('.popup__close_addition');
-const newPlaceSaveButton = document.querySelector('.popup__submit-button_addition');
+const closeAdditionPopup = document.querySelector('.popup__close_type_addition');
+const newPlaceSaveButton = document.querySelector('.popup__submit-button_type_addition');
 const newPlaceName = document.querySelector('.form__input-info_type_place');
 const newPlaceImage = document.querySelector('.form__input-info_type_image');
 
-const photoPopup = document.querySelector('.popup_photo');
+const photoPopup = document.querySelector('.popup_type_photo');
 
 const template = document.querySelector('#template-element').content;
 const container = document.querySelector('.elements__list');
 
-const photoCloseButton = document.querySelector('.popup__close_photo');
+const photoCloseButton = document.querySelector('.popup__close_type_photo');
 const popupPhotoSrc = document.querySelector('.popup__image')
 const popupText = document.querySelector('.popup__caption')
 
@@ -96,14 +96,14 @@ function createCard(cardName, cardLink) {
 }
 
 // Функция добавления элемента в разметку
-function addEl(item) {
+function addElement(item) {
   container.prepend(item)
 }
 
 //Функция для добавления новых карточек в разметку
 function cardSubmitHandler(evt) {
   evt.preventDefault();
-  addEl(createCard(newPlaceName.value, newPlaceImage.value))
+  addElement(createCard(newPlaceName.value, newPlaceImage.value))
   hideAdditionPopup();
 }
 
@@ -137,5 +137,5 @@ additionForm.addEventListener('submit', cardSubmitHandler) //Добавлени�
 
 // Добавление карточек на страницу из массива
 initialCards.forEach((item) => {
-  addEl(createCard(item.name, item.link))
+  addElement(createCard(item.name, item.link))
 })
