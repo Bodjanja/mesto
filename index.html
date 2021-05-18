@@ -59,13 +59,14 @@
             <h2 class="popup__title">Редактировать профиль</h2>
             <form name="editionform" class="form">
                 <fieldset class="form__item">
-                    <input name="name" type="text" class="form__input-info form__input-info_type_name" value="" required
-                        placeholder="Введите имя">
-                    <input name="description" type="text" value=""
+                    <input id="username" name="name" type="text" class="form__input-info form__input-info_type_name" value="" required
+                        placeholder="Введите имя" minlength="2" maxlength="40">
+                        <span class="form__input-info-error" id="username-error"></span>
+                    <input id="description" name="description" type="text" value=""
                         class="form__input-info form__input-info_type_description" required
-                        placeholder="Введите описание">
-
-                    <button type="submit" class="popup__submit-button" value="Save"
+                        placeholder="Введите описание" minlength="2" maxlength="200">
+                        <span class="form__input-info-error" id="description-error"></span>
+                    <button type="submit" class="popup__submit-button popup__submit-button_edition" value="Save"
                         aria-label="Добавить новую информацию профиля">Сохранить</button>
                 </fieldset>
             </form>
@@ -77,10 +78,12 @@
             <h2 class="popup__title">Новое место</h2>
             <form class="form form_type_addition" name="additionform">
                 <fieldset class="form__item">
-                    <input name="additionName" class="form__input-info form__input-info_type_place" type="text" value=""
-                        placeholder="Название" required>
-                    <input name="additionPhoto" class="form__input-info form__input-info_type_image" type="url" value=""
+                    <input id="newplace" name="additionName" class="form__input-info form__input-info_type_place" type="text" value=""
+                        placeholder="Название" required minlength="2" maxlength="30">
+                    <span class="form__input-info-error" id="newplace-error"></span>
+                    <input id="newplaceimg" name="additionPhoto" class="form__input-info form__input-info_type_image" type="url" value=""
                         placeholder="Ссылка на картинку" required>
+                        <span class="form__input-info-error" id="newplaceimg-error"></span>
                     <button class="popup__submit-button popup__submit-button_type_addition" type="submit" value="add"
                         aria-label="Добавить новую информацию с местом">Создать</button>
                 </fieldset>
@@ -97,6 +100,7 @@
             <button type="button" aria-label="Закрыть картинку" class="popup__close popup__close_type_photo"></button>
         </div>
     </div>
+    <script src="./scripts/validate.js"></script>
     <script src="./scripts/initialcardsmassive.js"></script>
     <script src="./scripts/index.js"></script>
 </body>

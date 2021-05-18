@@ -16,6 +16,10 @@ const newPlaceSaveButton = document.querySelector('.popup__submit-button_type_ad
 const newPlaceName = document.querySelector('.form__input-info_type_place');
 const newPlaceImage = document.querySelector('.form__input-info_type_image');
 
+const imagePopup = document.querySelector('.element__image')
+
+const editionButton = document.querySelector('.popup__submit-button_edition')
+
 const photoPopup = document.querySelector('.popup_type_photo');
 
 const template = document.querySelector('#template-element').content;
@@ -25,14 +29,36 @@ const photoCloseButton = document.querySelector('.popup__close_type_photo');
 const popupPhotoSrc = document.querySelector('.popup__image')
 const popupText = document.querySelector('.popup__caption')
 
+const config = {
+  formSelector: '.form',
+  inputSelector: '.form__input-info',
+  inputSubmitButton: '.popup__submit-button',
+  inputErrorClass: 'form__input-info_error',
+  errorActiveClass: 'form__input-info-error_active',
+}
+
 // -----------------------------------------------------------------------------------------------------
 //Объявление функций
 
+//Включение кнопки сохранения редактирования при открытие попапа (так как значения передаются автоматически)
+function editionSaveButton() {
+  editionButton.disabled = false
+}
+
+//Выключение кнопки сохранения места, если при предыдущем открытии были введены корректные инпуты и попап был закрыт на крестик
+function additionSaveButtonDisable() {
+  newPlaceSaveButton.disabled = true
+}
+
 //Функция открытия попапа редактирования профиля и перенос значений
 function openPopup() {
+  hideError(form, popupName, config)
+  hideError(form, popupDescription, config)
+
   popup.classList.toggle('popup_opened')
   popupName.value = namea.textContent;
   popupDescription.value = description.textContent;
+  editionSaveButton();
 }
 
 //Функция для закрытия попапа редактирования профиля
@@ -42,9 +68,13 @@ function hidePopup() {
 
 //Функция открытия попапа для добавления картинок
 function openAdditionPopup() {
+  hideError(additionForm, newPlaceImage, config)
+  hideError(additionForm, newPlaceName, config)
+
   additionPopup.classList.add('popup_opened')
   newPlaceName.value = null;
   newPlaceImage.value = null;
+  additionSaveButtonDisable()
 }
 
 //Функция для закрытия попапа добавления картинок
@@ -107,6 +137,11 @@ function cardSubmitHandler(evt) {
   hideAdditionPopup();
 }
 
+//Функция закрытия просмотра картинок в большом размере
+function fullSizePhotoClose() {
+  photoPopup.classList.remove('popup_opened')
+}
+
 // -----------------------------------------------------------------------------------------------------
 //Условия выполнения функций
 
@@ -120,15 +155,41 @@ closePopUpButton.addEventListener('click', hidePopup) //Редактирован
 
 closeAdditionPopup.addEventListener('click', hideAdditionPopup) //Добавления картинок
 
-photoCloseButton.addEventListener('click', function () {
-  photoPopup.classList.remove('popup_opened')
-}) //Закрытие просмотра картинок в большом размере
+photoCloseButton.addEventListener('click', fullSizePhotoClose) //Закрытие просмотра картинок в большом размере
 
-// popup.addEventListener('click', function (event) {
-//     if (event.target === event.currentTarget) {
-//         hidePopup()
-//     }
-// })
+//Закрытие попапа редактирования профиля, если осуществлён клик по внешней области
+popup.addEventListener('click', function (event) {
+  if (event.target === event.currentTarget) {
+    hidePopup()
+  }
+})
+
+//Закрытие попапа добавления места, если осуществлён клик по внешней области
+additionPopup.addEventListener('click', function (event) {
+  if (event.target === event.currentTarget) {
+    hideAdditionPopup()
+  }
+})
+
+//Закрытие попапа широкий картинок, если осуществлён клик по внешней области
+photoPopup.addEventListener('click', function (event) {
+  if (event.target === event.currentTarget) {
+    fullSizePhotoClose()
+  }
+})
+
+//Закрытие попапа при нажатии на кнопку Escape
+document.addEventListener('keydown', function (evt) {
+  if (evt.key === 'Escape') {
+    if (evt.target.className.includes('profile__edition-button')) {
+      hidePopup()
+    } else if (evt.target.className.includes('profile__add-button')) {
+      hideAdditionPopup()
+    } else if (evt.target.className.includes('page')) {
+      fullSizePhotoClose()
+    }
+  }
+})
 
 // Замена информации в полях профиля
 form.addEventListener('submit', formSubmitHandler)
@@ -139,3 +200,5 @@ additionForm.addEventListener('submit', cardSubmitHandler) //Добавлени�
 initialCards.forEach((item) => {
   addElement(createCard(item.name, item.link))
 })
+
+enableVerification(config)
