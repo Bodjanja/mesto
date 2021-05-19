@@ -51,13 +51,13 @@ function disableAdditionSaveButton() {
 }
 
 //Универсальная функция отокрытия попапов
-function openPopup(popup){
+function openPopup(popup) {
   popup.classList.toggle('popup_opened');
   document.addEventListener('keydown', closePopupEsc)
 }
 
 //Универсальная функция закрытия попапов
-function closePopup(popup){
+function closePopup(popup) {
   popup.classList.remove('popup_opened');
   document.removeEventListener('keydown', closePopupEsc)
 }
@@ -143,15 +143,12 @@ function handleCardSubmit(evt) {
 }
 
 //Функция закрытия попапа при нажатии на клавишу Escape
-function closePopupEsc(evt){
+function closePopupEsc(evt) {
   if (evt.key === 'Escape') {
-    if (evt.target.className.includes('profile__edition-button')) {
-      closePopup(profilePopup)
-    } else if (evt.target.className.includes('profile__add-button')) {
-      closePopup(additionPopup)
-    } else if (evt.target.className.includes('page')) {
-      closePopup(photoPopup)
-}}}
+    const open = document.querySelector('.popup_opened');
+    closePopup(open);
+  }
+}
 
 // -----------------------------------------------------------------------------------------------------
 //Условия выполнения функций
@@ -162,11 +159,17 @@ openPopUpButton.addEventListener('click', openProfilePopup) //Редактиро
 additionPopupOpenButton.addEventListener('click', openAdditionPopup) //Добавление картинок
 
 // Закрытие попапа
-closeProfilePopup.addEventListener('click', ()=>{closePopup(profilePopup)}) //Редактирования профиля
+closeProfilePopup.addEventListener('click', () => {
+  closePopup(profilePopup)
+}) //Редактирования профиля
 
-closeAdditionPopup.addEventListener('click', ()=>{closePopup(additionPopup)}) //Добавления картинок
+closeAdditionPopup.addEventListener('click', () => {
+  closePopup(additionPopup)
+}) //Добавления картинок
 
-photoCloseButton.addEventListener('click', ()=>{closePopup(photoPopup)}) //Закрытие просмотра картинок в большом размере
+photoCloseButton.addEventListener('click', () => {
+  closePopup(photoPopup)
+}) //Закрытие просмотра картинок в большом размере
 
 //Закрытие попапа редактирования профиля, если осуществлён клик по внешней области
 profilePopup.addEventListener('mousedown', function (event) {
