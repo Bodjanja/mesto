@@ -42,8 +42,7 @@
 
         <template id="template-element">
             <li class="element">
-                <!-- без null работа не проходит тестировщик яндекса -->
-                <img class="element__image" src="null" alt="">
+                <img class="element__image" src="#" alt="">
                 <div class="element__container">
                     <h2 class="element__title"></h2>
                     <button type="button" aria-label="Поставить лайк" class="element__icon"></button>
@@ -54,10 +53,10 @@
         </template>
 
     </div>
-    <div class="popup">
+    <div class="popup popup_type_profile">
         <div class="popup__container">
             <h2 class="popup__title">Редактировать профиль</h2>
-            <form name="editionform" class="form">
+            <form name="editionform" class="form form_type_profile" novalidate>
                 <fieldset class="form__item">
                     <input id="username" name="name" type="text" class="form__input-info form__input-info_type_name" value="" required
                         placeholder="Введите имя" minlength="2" maxlength="40">
@@ -70,13 +69,13 @@
                         aria-label="Добавить новую информацию профиля">Сохранить</button>
                 </fieldset>
             </form>
-            <button type="button" aria-label="Закрыть редактирование" class="popup__close"></button>
+            <button type="button" aria-label="Закрыть редактирование" class="popup__close popup__close_type_profile"></button>
         </div>
     </div>
     <div class="popup popup_type_addition">
         <div class="popup__container">
             <h2 class="popup__title">Новое место</h2>
-            <form class="form form_type_addition" name="additionform">
+            <form class="form form_type_addition" name="additionform" novalidate>
                 <fieldset class="form__item">
                     <input id="newplace" name="additionName" class="form__input-info form__input-info_type_place" type="text" value=""
                         placeholder="Название" required minlength="2" maxlength="30">
@@ -94,8 +93,7 @@
     </div>
     <div class="popup popup_type_photo">
         <div class="popup__figurecaption">
-            <!-- без null работа не проходит тестировщик яндекса -->
-            <img class="popup__image" src="null" alt="Картинка места">
+            <img class="popup__image" src="#" alt="Картинка места">
             <p class="popup__caption"></p>
             <button type="button" aria-label="Закрыть картинку" class="popup__close popup__close_type_photo"></button>
         </div>

@@ -43,7 +43,7 @@ const hasInvalidInput = (inputList) => {
     })
 }
 
-const buttonState = (submitButton, inputList) => {
+const checkButtonState = (submitButton, inputList) => {
     if (hasInvalidInput(inputList) === true) {
         submitButton.disabled = true
 
@@ -67,11 +67,11 @@ const setEventListeners = (formElement, config) => { //Поиск всех input
     inputList.forEach((inputElement) => {
         inputElement.addEventListener('input', () => {
             checkValidity(formElement, inputElement, restConfig);
-            buttonState(submitButton, inputList);
+            checkButtonState(submitButton, inputList);
 
         })
     })
-    buttonState(submitButton, inputList);
+    checkButtonState(submitButton, inputList);
 }
 
 const enableVerification = (config) => {

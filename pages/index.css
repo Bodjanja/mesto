@@ -51,5 +51,5 @@
 @import url(../blocks/form/__item/form__item.css);
 @import url(../blocks/form/__input-info/form__input-info.css);
 @import url(../blocks/form/__input-info/_error/form__input-info_error.css);
-@import url(../blocks/form/input-info-error/form__input-info-error.css);
-@import url(../blocks/form/input-info-error/_active/form__input-info-error_active.css);
+@import url(../blocks/form/__input-info-error/form__input-info-error.css);
+@import url(../blocks/form/__input-info-error/_active/form__input-info-error_active.css);
