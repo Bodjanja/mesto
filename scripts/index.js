@@ -16,19 +16,18 @@ const newPlaceSaveButton = document.querySelector('.popup__submit-button_type_ad
 const newPlaceName = document.querySelector('.form__input-info_type_place');
 const newPlaceImage = document.querySelector('.form__input-info_type_image');
 
-const imagePopup = document.querySelector('.element__image')
-
 const editionButton = document.querySelector('.popup__submit-button_edition')
 
-const photoPopup = document.querySelector('.popup_type_photo');
+export const photoPopup = document.querySelector('.popup_type_photo');
 
 const template = document.querySelector('#template-element').content;
 const container = document.querySelector('.elements__list');
 
 const photoCloseButton = document.querySelector('.popup__close_type_photo');
-const popupPhotoSrc = document.querySelector('.popup__image')
-const popupText = document.querySelector('.popup__caption')
+export const popupPhotoSrc = document.querySelector('.popup__image')
+export const popupText = document.querySelector('.popup__caption')
 
+//Конфиг с элементами формы для валидации
 const config = {
   formSelector: '.form',
   inputSelector: '.form__input-info',
@@ -36,6 +35,41 @@ const config = {
   inputErrorClass: 'form__input-info_error',
   errorActiveClass: 'form__input-info-error_active',
 }
+
+// Импорт содержания модулей
+import {Card} from './Card.js'
+import {initialCards} from './initialcardsmassive.js'
+import {FormValidator} from './FormValidator.js'
+
+//Добавление карточек из массива
+initialCards.forEach((item)=>{
+  const card = new Card(item.name, item.link, '#template-element')
+  const cardElement = card.generateCard()
+  container.append(cardElement);
+})
+
+// Функция добавления элемента в разметку из попапа
+function addElement() {
+  const card = new Card(newPlaceName.value, newPlaceImage.value, '#template-element')
+  const cardElement = card.generateCard()
+  container.prepend(cardElement);
+}
+
+//Функция для добавления новых карточек в разметку через форму 
+function handleCardSubmit(evt) {
+  evt.preventDefault();
+  addElement()
+  closePopup(additionPopup)
+}
+
+additionForm.addEventListener('submit', handleCardSubmit) //Добавление новых карточек
+
+//Валидация форм
+const ProfileForm = new FormValidator(config, document.querySelector('form[name="editionform"]'))
+ProfileForm.enableValidation()//Валидирование профиля
+
+const AdditionForm = new FormValidator(config, document.querySelector('form[name="additionform"]'))
+AdditionForm.enableValidation()//Валидирование формы добавления карточки
 
 // -----------------------------------------------------------------------------------------------------
 //Объявление функций
@@ -51,8 +85,8 @@ function disableAdditionSaveButton() {
 }
 
 //Универсальная функция отокрытия попапов
-function openPopup(popup) {
-  popup.classList.toggle('popup_opened');
+export function openPopup(popup) {
+  popup.classList.toggle('popup_opened')
   document.addEventListener('keydown', closePopupEsc)
 }
 
@@ -64,9 +98,7 @@ function closePopup(popup) {
 
 //Функция открытия попапа редактирования профиля и перенос значений полей
 function openProfilePopup() {
-  hideError(profileForm, popupName, config)
-  hideError(profileForm, popupDescription, config)
-
+  
   openPopup(profilePopup)
   popupName.value = profileName.textContent;
   popupDescription.value = profileDescription.textContent;
@@ -75,9 +107,6 @@ function openProfilePopup() {
 
 //Функция открытия попапа для добавления картинок и коррекция значений полей
 function openAdditionPopup() {
-  hideError(additionForm, newPlaceImage, config)
-  hideError(additionForm, newPlaceName, config)
-
   openPopup(additionPopup)
   newPlaceName.value = null;
   newPlaceImage.value = null;
@@ -90,22 +119,6 @@ function handleProfileFormSubmit(evt) {
   profileName.textContent = popupName.value;
   profileDescription.textContent = popupDescription.value;
   closePopup(profilePopup)
-}
-
-//Функция открытия попапа с большим разрешением картинок
-function handleFullSizeImg(evt) {
-  const textDom = evt.target.parentElement;
-  const textSource = textDom.querySelector('.element__title')
-
-  popupPhotoSrc.src = evt.target.currentSrc
-  popupPhotoSrc.alt = textSource.textContent
-  popupText.textContent = textSource.textContent
-  openPopup(photoPopup)
-}
-
-//Функция удаления карточки
-function removeElement(evt) {
-  evt.target.closest('.element').remove();
 }
 
 //Общая функция создания карточки + обвес слушателей
@@ -121,25 +134,9 @@ function createCard(cardName, cardLink) {
 
   cardRemoveButton.addEventListener('click', removeElement) //Удалить карточку
 
-  likeIcon.addEventListener('click', function () {
-    likeIcon.classList.toggle('element__icon_liked')
-  }) //Поставить "Нравится"
-
   wideImage.addEventListener('click', handleFullSizeImg) //Синхронизация картинки и подписи при попапе
 
   return element
-}
-
-// Функция добавления элемента в разметку
-function addElement(item) {
-  container.prepend(item)
-}
-
-//Функция для добавления новых карточек в разметку
-function handleCardSubmit(evt) {
-  evt.preventDefault();
-  addElement(createCard(newPlaceName.value, newPlaceImage.value))
-  closePopup(additionPopup)
 }
 
 //Функция закрытия попапа при нажатии на клавишу Escape
@@ -149,7 +146,6 @@ function closePopupEsc(evt) {
     closePopup(open);
   }
 }
-
 // -----------------------------------------------------------------------------------------------------
 //Условия выполнения функций
 
@@ -185,7 +181,7 @@ additionPopup.addEventListener('mousedown', function (event) {
   }
 })
 
-//Закрытие попапа широкий картинок, если осуществлён клик по внешней области
+//Закрытие попапа широких картинок, если осуществлён клик по внешней области
 photoPopup.addEventListener('mousedown', function (event) {
   if (event.target === event.currentTarget) {
     closePopup(photoPopup)
@@ -194,12 +190,3 @@ photoPopup.addEventListener('mousedown', function (event) {
 
 // Замена информации в полях профиля
 profileForm.addEventListener('submit', handleProfileFormSubmit)
-
-additionForm.addEventListener('submit', handleCardSubmit) //Добавление новых карточек
-
-// Добавление карточек на страницу из массива
-initialCards.forEach((item) => {
-  addElement(createCard(item.name, item.link))
-})
-
-enableVerification(config)
