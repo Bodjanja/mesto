@@ -20,7 +20,7 @@ export class FormValidator {
     }
 
     _checkValidity(inputElement) { //Проверка условий валидности
-        if (inputElement.validity.valid === true) {
+        if (inputElement.validity.valid) {
             this._hideError(inputElement)
 
         } else {
@@ -44,7 +44,7 @@ export class FormValidator {
         errorElement.classList.remove(this._config.errorActiveClass)
     }
 
-    _clearErrorsProfile() {//Функция для удаления ошибки валидации при повторном открытии попапа (если при прошлом открытии поля были некорректны)
+    clearErrorsProfile() {//Функция для удаления ошибки валидации при повторном открытии попапа (если при прошлом открытии поля были некорректны)
         const errorMessages = Array.from(this._formElement.querySelectorAll(this._config.spanErrorClass))
         const inputsWithError = Array.from(this._formElement.querySelectorAll(this._config.inputSelector))
         inputsWithError.forEach((item) => {
@@ -76,7 +76,6 @@ export class FormValidator {
     }
 
     enableValidation() {
-        this._clearErrorsProfile()
         this._formElement.addEventListener('submit', (evt) => {
             evt.preventDefault()
         })

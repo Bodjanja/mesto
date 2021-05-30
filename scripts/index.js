@@ -51,7 +51,9 @@ additionForm.addEventListener('submit', handleCardSubmit) //Добавление
 
 //Валидация форм
 const profileEditionForm = new FormValidator(config, document.querySelector('form[name="edition-form"]'))//Валидация профиля
+profileEditionForm.enableValidation()
 const cardAdditionForm = new FormValidator(config, document.querySelector('form[name="addition-form"]'))//Валидация попапа добавления карточек
+cardAdditionForm.enableValidation()
 
 // -----------------------------------------------------------------------------------------------------
 //Объявление функций
@@ -85,7 +87,7 @@ function disableAdditionSaveButton() {
   newPlaceSaveButton.disabled = true
 }
 
-//Универсальная функция отокрытия попапов
+//Универсальная функция открытия попапов
 export function openPopup(popup) {
   popup.classList.toggle('popup_opened')
   document.addEventListener('keydown', closePopupEsc)
@@ -99,8 +101,8 @@ function closePopup(popup) {
 
 //Функция открытия попапа редактирования профиля и перенос значений полей
 function openProfilePopup() {
-  profileEditionForm.enableValidation()
   openPopup(profilePopup)
+  profileEditionForm.clearErrorsProfile()
   
   popupName.value = profileName.textContent
   popupDescription.value = profileDescription.textContent
@@ -109,8 +111,8 @@ function openProfilePopup() {
 
 //Функция открытия попапа для добавления картинок и коррекция значений полей
 function openAdditionPopup() {
-  cardAdditionForm.enableValidation()
   openPopup(additionPopup)
+  cardAdditionForm.clearErrorsProfile()
   newPlaceName.value = null
   newPlaceImage.value = null
   disableAdditionSaveButton()
