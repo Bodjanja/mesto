@@ -1,27 +1,28 @@
 import {openPopup, popupPhotoSrc, popupText, photoPopup} from './index.js'
 export class Card { //Создаём класс карточки и абстрактные параметры
-  constructor(cardName, cardLink, templateElement) {
-    this._templateElement = document.querySelector(templateElement)
-    this._text = cardName;
-    this._image = cardLink;
+  constructor(cardName, cardLink, templateSelector) {
+    this._templateSelector = document.querySelector(templateSelector)
+    this._text = cardName
+    this._image = cardLink
   }
   _getTemplate() { //Клонируем разметку карточки в DOM-дереве
-    const cardElement = this._templateElement.content.querySelector('.element').cloneNode(true)
+    const cardElement = this._templateSelector.content.querySelector('.element').cloneNode(true)
     return cardElement
   }
 
   generateCard() { //Наполняем карточку данными и возвращаем готовый экземпляр
-    this._element = this._getTemplate();
+    this._element = this._getTemplate()
     this._setEventListeners()
+    const cardImage = this._element.querySelector('.element__image')
 
-    this._element.querySelector('.element__image').src = this._image
+    cardImage.src = this._image
     this._element.querySelector('.element__title').textContent = this._text
-    this._element.querySelector('.element__image').alt = this._text
+    cardImage.alt = this._text
     return this._element
   }
   //Функция открытия попапа с большим разрешением картинок
   _handleFullSizeImg(evt) {
-    const textDom = evt.target.parentElement;
+    const textDom = evt.target.parentElement
     const textSource = textDom.querySelector('.element__title')
 
     popupPhotoSrc.src = evt.target.currentSrc
@@ -31,12 +32,12 @@ export class Card { //Создаём класс карточки и абстра
   }
 
   _likeCard() { //Функция поставить "нравится" карточке
-    const likeButton = this._element.querySelector('.element__icon');
+    const likeButton = this._element.querySelector('.element__icon')
     likeButton.classList.toggle('element__icon_liked')
   }
 
   _removeElement(evt) { //Функция удаления карточки
-    evt.target.closest('.element').remove();
+    evt.target.closest('.element').remove()
   }
 
   _setEventListeners() { //Обвес элементов слушателями

@@ -1,3 +1,8 @@
+// Импорт содержания модулей
+import {Card} from './Card.js'
+import {initialCards} from './initial-cards.js'
+import {FormValidator} from './FormValidator.js'
+
 // Объявление переменных
 const openPopUpButton = document.querySelector('.profile__edition-button');
 const profilePopup = document.querySelector('.popup_type_profile');
@@ -16,16 +21,16 @@ const newPlaceSaveButton = document.querySelector('.popup__submit-button_type_ad
 const newPlaceName = document.querySelector('.form__input-info_type_place');
 const newPlaceImage = document.querySelector('.form__input-info_type_image');
 
-const editionButton = document.querySelector('.popup__submit-button_edition')
+const editionButton = document.querySelector('.popup__submit-button_edition');
 
 export const photoPopup = document.querySelector('.popup_type_photo');
 
-const template = document.querySelector('#template-element').content;
+
 const container = document.querySelector('.elements__list');
 
 const photoCloseButton = document.querySelector('.popup__close_type_photo');
-export const popupPhotoSrc = document.querySelector('.popup__image')
-export const popupText = document.querySelector('.popup__caption')
+export const popupPhotoSrc = document.querySelector('.popup__image');
+export const popupText = document.querySelector('.popup__caption');
 
 //Конфиг с элементами формы для валидации
 const config = {
@@ -34,45 +39,41 @@ const config = {
   inputSubmitButton: '.popup__submit-button',
   inputErrorClass: 'form__input-info_error',
   errorActiveClass: 'form__input-info-error_active',
+  spanErrorClass: '.form__input-info-error'
 }
-
-// Импорт содержания модулей
-import {Card} from './Card.js'
-import {initialCards} from './initialcardsmassive.js'
-import {FormValidator} from './FormValidator.js'
 
 //Добавление карточек из массива
-initialCards.forEach((item)=>{
-  const card = new Card(item.name, item.link, '#template-element')
-  const cardElement = card.generateCard()
-  container.append(cardElement);
+initialCards.forEach((item) => {
+  container.append(createCard(item.name, item.link))
 })
-
-// Функция добавления элемента в разметку из попапа
-function addElement() {
-  const card = new Card(newPlaceName.value, newPlaceImage.value, '#template-element')
-  const cardElement = card.generateCard()
-  container.prepend(cardElement);
-}
-
-//Функция для добавления новых карточек в разметку через форму 
-function handleCardSubmit(evt) {
-  evt.preventDefault();
-  addElement()
-  closePopup(additionPopup)
-}
 
 additionForm.addEventListener('submit', handleCardSubmit) //Добавление новых карточек
 
 //Валидация форм
-const ProfileForm = new FormValidator(config, document.querySelector('form[name="editionform"]'))
-ProfileForm.enableValidation()//Валидирование профиля
-
-const AdditionForm = new FormValidator(config, document.querySelector('form[name="additionform"]'))
-AdditionForm.enableValidation()//Валидирование формы добавления карточки
+const profileEditionForm = new FormValidator(config, document.querySelector('form[name="edition-form"]'))//Валидация профиля
+const cardAdditionForm = new FormValidator(config, document.querySelector('form[name="addition-form"]'))//Валидация попапа добавления карточек
 
 // -----------------------------------------------------------------------------------------------------
 //Объявление функций
+
+//Функция создания карточки
+function createCard(name, link){
+  const card = new Card(name, link, '#template-element')
+  const cardElement = card.generateCard()
+  return cardElement
+}
+
+// Функция добавления элемента в разметку из попапа
+function addElement() {
+  container.prepend(createCard(newPlaceName.value, newPlaceImage.value))
+}
+
+//Функция для добавления новых карточек в разметку через форму 
+function handleCardSubmit(evt) {
+  evt.preventDefault()
+  addElement()
+  closePopup(additionPopup)
+}
 
 //Включение кнопки сохранения редактирования при открытие попапа (так как значения передаются автоматически)
 function enableProfileSaveButton() {
@@ -92,58 +93,42 @@ export function openPopup(popup) {
 
 //Универсальная функция закрытия попапов
 function closePopup(popup) {
-  popup.classList.remove('popup_opened');
+  popup.classList.remove('popup_opened')
   document.removeEventListener('keydown', closePopupEsc)
 }
 
 //Функция открытия попапа редактирования профиля и перенос значений полей
 function openProfilePopup() {
-  
+  profileEditionForm.enableValidation()
   openPopup(profilePopup)
-  popupName.value = profileName.textContent;
-  popupDescription.value = profileDescription.textContent;
-  enableProfileSaveButton();
+  
+  popupName.value = profileName.textContent
+  popupDescription.value = profileDescription.textContent
+  enableProfileSaveButton()
 }
 
 //Функция открытия попапа для добавления картинок и коррекция значений полей
 function openAdditionPopup() {
+  cardAdditionForm.enableValidation()
   openPopup(additionPopup)
-  newPlaceName.value = null;
-  newPlaceImage.value = null;
+  newPlaceName.value = null
+  newPlaceImage.value = null
   disableAdditionSaveButton()
 }
 
 //Функция для передачи информации о профиле
 function handleProfileFormSubmit(evt) {
-  evt.preventDefault();
-  profileName.textContent = popupName.value;
-  profileDescription.textContent = popupDescription.value;
+  evt.preventDefault()
+  profileName.textContent = popupName.value
+  profileDescription.textContent = popupDescription.value
   closePopup(profilePopup)
-}
-
-//Общая функция создания карточки + обвес слушателей
-function createCard(cardName, cardLink) {
-  const element = template.querySelector('.element').cloneNode(true);
-  const cardRemoveButton = element.querySelector('#removebutton');
-  const likeIcon = element.querySelector('.element__icon');
-  const wideImage = element.querySelector('.element__image');
-
-  element.querySelector('.element__image').src = cardLink;
-  element.querySelector('.element__title').textContent = cardName;
-  element.querySelector('.element__image').alt = cardName;
-
-  cardRemoveButton.addEventListener('click', removeElement) //Удалить карточку
-
-  wideImage.addEventListener('click', handleFullSizeImg) //Синхронизация картинки и подписи при попапе
-
-  return element
 }
 
 //Функция закрытия попапа при нажатии на клавишу Escape
 function closePopupEsc(evt) {
   if (evt.key === 'Escape') {
-    const open = document.querySelector('.popup_opened');
-    closePopup(open);
+    const open = document.querySelector('.popup_opened')
+    closePopup(open)
   }
 }
 // -----------------------------------------------------------------------------------------------------

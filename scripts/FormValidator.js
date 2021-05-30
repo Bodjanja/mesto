@@ -1,11 +1,5 @@
 export class FormValidator {
-    constructor(config = {
-        formSelector: '.form',
-        inputSelector: '.form__input-info',
-        inputSubmitButton: '.popup__submit-button',
-        inputErrorClass: 'form__input-info_error',
-        errorActiveClass: 'form__input-info-error_active',
-    }, formElement) {
+    constructor(config, formElement) {
 
         this._config = config
         this._formElement = formElement
@@ -17,22 +11,20 @@ export class FormValidator {
 
         this._inputList.forEach((inputElement) => {
             inputElement.addEventListener('input', () => {
-                this._checkValidity(inputElement);
-                this._checkButtonState();
+                this._checkValidity(inputElement)
+                this._checkButtonState()
 
             })
         })
-        this._checkButtonState();
+        this._checkButtonState()
     }
 
     _checkValidity(inputElement) { //Проверка условий валидности
-        // console.log(inputElement.validity)
         if (inputElement.validity.valid === true) {
             this._hideError(inputElement)
 
         } else {
             this._showError(inputElement)
-            // console.log(inputElement.validationMessage)
         }
     }
 
@@ -50,6 +42,18 @@ export class FormValidator {
         inputElement.classList.remove(this._config.inputErrorClass)
         errorElement.textContent = ''
         errorElement.classList.remove(this._config.errorActiveClass)
+    }
+
+    _clearErrorsProfile() {//Функция для удаления ошибки валидации при повторном открытии попапа (если при прошлом открытии поля были некорректны)
+        const errorMessages = Array.from(this._formElement.querySelectorAll(this._config.spanErrorClass))
+        const inputsWithError = Array.from(this._formElement.querySelectorAll(this._config.inputSelector))
+        inputsWithError.forEach((item) => {
+            item.classList.remove(this._config.inputErrorClass)
+        })
+        errorMessages.forEach((item) => {
+            item.classList.remove(this._config.errorActiveClass)
+            errorMessages.textContent = ''
+        })
     }
 
     _hasInvalidInput() {
@@ -72,9 +76,10 @@ export class FormValidator {
     }
 
     enableValidation() {
+        this._clearErrorsProfile()
         this._formElement.addEventListener('submit', (evt) => {
-            evt.preventDefault();
+            evt.preventDefault()
         })
-        this._setEventListeners();
+        this._setEventListeners()
     }
 }
