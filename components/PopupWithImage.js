@@ -9,9 +9,7 @@ export class PopupWithImage extends Popup {
     open(evt) {
         this.popupElement.classList.add('popup_opened')
 
-        document.addEventListener('keydown', (evt) => {
-            this._handleEscClose(evt)
-        })//Закрытие попапа с картинкой нажатием на esc
+        document.addEventListener('keydown', this._handleEscClose)//Закрытие попапа с картинкой нажатием на esc
 
         const textDom = evt.target.parentElement
         const textSource = textDom.querySelector('.element__title')

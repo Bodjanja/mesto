@@ -10,7 +10,7 @@ import {PopupWithForm} from '../components/PopupWithForm.js'
 import {UserInfo} from '../components/UserInfo.js'
 import { PopupWithImage } from '../components/PopupWithImage.js'
 
-import {additionPopup, profilePopup, photoPopup, openPopUpButton, photoCloseButton, additionPopupOpenButton, handleCardClick} from '../utils/constants.js'
+import {additionPopup, profilePopup, photoPopup, buttonOpenPopupProfile, photoCloseButton, additionPopupOpenButton, handleCardClick} from '../utils/constants.js'
 
 //Конфиг с элементами формы для валидации
 const config = {
@@ -32,23 +32,33 @@ const cardsSection = new Section(
   }}, '.elements__list')
 
 cardsSection.renderAll()
+// -----------------------------------------------
 
-export {additionCardPopup}
-const additionCardPopup = new PopupWithForm('.popup_type_addition',
+export const additionCardPopup = new PopupWithForm('.popup_type_addition',
 (cardData)=>{cardsSection.addItem(cardData)
   additionCardPopup.close()//закрытие попапа
 })
-additionCardPopup.setEventListeners()
+additionCardPopup.setEventListeners('.popup__close')
+
+// -----------------------------------------------
+
+export const dataTransfer = new UserInfo('.profile__title', '.profile__subtitle')//Объявление класса обработки информации о профиле
+
+// -----------------------------------------------
 
 export const editionProfilePopup = new PopupWithForm('.popup_type_profile',
 (profileData)=>{
-  const dataTransfer = new UserInfo('.profile__title', '.profile__subtitle')
   dataTransfer.setUserInfo(profileData)
   editionProfilePopup.close()
 })
-editionProfilePopup.setEventListeners()
+editionProfilePopup.setEventListeners('.popup__close')
 
-const widePopup = new PopupWithImage('.popup_type_photo')//Объявление класса с широкой картинкой
+// -----------------------------------------------
+
+export const widePopup = new PopupWithImage('.popup_type_photo')//Объявление класса с широкой картинкой
+widePopup.setEventListeners('.popup__close')//Закрытие просмотра картинок в большом размере
+
+// -----------------------------------------------
 
 //Валидация форм
 export const profileEditionForm = new FormValidator(config, document.querySelector('form[name="edition-form"]'))//Валидация профиля
@@ -60,13 +70,9 @@ cardAdditionForm.enableValidation()
 //Условия выполнения функций
 
 // Открытие попапа
-openPopUpButton.addEventListener('click', openProfilePopup) //Редактирование профиля
+buttonOpenPopupProfile.addEventListener('click', openProfilePopup) //Редактирование профиля
 
 additionPopupOpenButton.addEventListener('click', openAdditionPopup) //Добавление картинок
-
-photoCloseButton.addEventListener('click', () => {
-  widePopup.close()
-}) //Закрытие просмотра картинок в большом размере
 
 //Закрытие попапа редактирования профиля, если осуществлён клик по внешней области
 profilePopup.addEventListener('mousedown', function (event) {

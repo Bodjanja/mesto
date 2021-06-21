@@ -1,6 +1,5 @@
-import {newPlaceSaveButton, editionButton} from '../utils/constants.js'
-import {UserInfo} from '../components/UserInfo.js'
-import {additionCardPopup, profileEditionForm, cardAdditionForm, editionProfilePopup} from '../pages/index.js'
+import {newPlaceSaveButton, editionButton, inputName, inputDescription} from '../utils/constants.js'
+import {additionCardPopup, profileEditionForm, cardAdditionForm, editionProfilePopup, dataTransfer} from '../pages/index.js'
 
   //Включение кнопки сохранения редактирования при открытие попапа (так как значения передаются автоматически)
 function enableProfileSaveButton() {
@@ -15,8 +14,10 @@ function disableAdditionSaveButton() {
 //Функция открытия попапа редактирования профиля и перенос значений полей
 export function openProfilePopup() {
   editionProfilePopup.open()
-  const dataTransferReverse = new UserInfo('.profile__title', '.profile__subtitle')
-  dataTransferReverse.getUserInfo()
+  const {name, description} = dataTransfer.getUserInfo()
+  inputName.value = name
+  inputDescription.value = description
+
   
   profileEditionForm.clearErrorsProfile()
   enableProfileSaveButton()

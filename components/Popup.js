@@ -1,18 +1,17 @@
-import {closeProfilePopup, closeAdditionPopup, closePhotoPopup} from '../utils/constants.js'
-
 export class Popup {
     constructor(popupSelector) {
         this.popupElement = document.querySelector(popupSelector)
+        this._handleEscClose = this._handleEscClose.bind(this)
     }
 
     open() {
         this.popupElement.classList.add('popup_opened')
-        document.addEventListener('keydown', (evt)=>{this._handleEscClose(evt)})
+        document.addEventListener('keydown', this._handleEscClose)
     }
 
     close() {
         this.popupElement.classList.remove('popup_opened')
-        document.removeEventListener('keydown', (evt)=>{this._handleEscClose(evt)})
+        document.removeEventListener('keydown', this._handleEscClose)
     }
 
     _handleEscClose(evt) {
@@ -21,16 +20,8 @@ export class Popup {
           }
     }
 
-    setEventListeners() {
-        closeProfilePopup.addEventListener('click', () => {
-            this.close()
-        })
-
-        closeAdditionPopup.addEventListener('click', () => {
-            this.close()
-        })
-
-        closePhotoPopup.addEventListener('click', () => {
+    setEventListeners(popupCloseBtn) {
+        this.popupElement.querySelector(popupCloseBtn).addEventListener('click', () => {
             this.close()
         })
     }
