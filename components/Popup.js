@@ -1,7 +1,10 @@
+//К РЕВЬЮЕРУ: Благодарю за Ваши пояснения, дополнительные объяснения и полезные ссылки. Благодаря этому, принципы ООП мне стали более понятны.
+
 export class Popup {
     constructor(popupSelector) {
         this.popupElement = document.querySelector(popupSelector)
         this._handleEscClose = this._handleEscClose.bind(this)
+        this.buttonClose = this.popupElement.querySelector('.popup__close')
     }
 
     open() {
@@ -20,9 +23,15 @@ export class Popup {
           }
     }
 
-    setEventListeners(popupCloseBtn) {
-        this.popupElement.querySelector(popupCloseBtn).addEventListener('click', () => {
+    setEventListeners() {
+        this.buttonClose.addEventListener('click', () => {
             this.close()
         })
+
+        this.popupElement.addEventListener('mousedown', (event) => {
+            if (event.target === event.currentTarget) {
+                this.close()
+            }
+    })
     }
 }
