@@ -26,8 +26,8 @@ const config = {
 const cardsSection = new Section(
   {items: initialCards,
   renderer: (name, link)=>{
-  const card = new Card(name, link, '#template-element', (evt) => {
-    widePopup.open(evt)
+  const card = new Card(name, link, '#template-element', () => {
+    widePopup.open({name, link})
   })
   const cardElement = card.generateCard()
   return cardElement

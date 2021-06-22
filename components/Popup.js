@@ -1,5 +1,3 @@
-//К РЕВЬЮЕРУ: Благодарю за Ваши пояснения, дополнительные объяснения и полезные ссылки. Благодаря этому, принципы ООП мне стали более понятны.
-
 export class Popup {
     constructor(popupSelector) {
         this.popupElement = document.querySelector(popupSelector)

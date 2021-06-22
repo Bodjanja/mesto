@@ -22,8 +22,8 @@ export class PopupWithForm extends Popup {
         return result
     }
 
-    setEventListeners(popupCloseBtn) {
-        super.setEventListeners(popupCloseBtn)
+    setEventListeners() {
+        super.setEventListeners()
         this._formElement.addEventListener('submit', (evt) => {
             evt.preventDefault()
             const cardData = this._getInputValues()
