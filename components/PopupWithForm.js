@@ -4,12 +4,6 @@ export class PopupWithForm extends Popup {
     constructor(popupSelector, onSubmitCb) {
         super(popupSelector)
         this._onSubmitCb = onSubmitCb
-        this._formElement = this.popupElement.querySelector('.form')
-    }
-
-    close() {
-        super.close()
-        this._formElement.reset()
     }
 
     _getInputValues() {
@@ -22,12 +16,16 @@ export class PopupWithForm extends Popup {
         return result
     }
 
+    close(){
+        super.close()
+        this._formElement.reset()
+    }
+
     setEventListeners() {
         super.setEventListeners()
         this._formElement.addEventListener('submit', (evt) => {
             evt.preventDefault()
-            const cardData = this._getInputValues()
-            this._onSubmitCb(cardData)
+            this._onSubmitCb()
         })
     }
 

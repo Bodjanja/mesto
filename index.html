@@ -16,11 +16,14 @@
 
         <main class="content">
             <section class="profile">
-                <img class="profile__avatar" src="<%=require('./images/image.png')%>" alt="Кусто">
+                <div class="profile__avatar-container">
+                    <img class="profile__avatar" src="" alt="">
+                </div>
+                
                 <div class="profile__container">
                     <div class="profile__subcontainer">
-                        <h1 class="profile__title">Федор Конюхов</h1>
-                        <p class="profile__subtitle">Русский путешественник-исследователь</p>
+                        <h1 class="profile__title"></h1>
+                        <p class="profile__subtitle"></p>
                         <button type="button" aria-label="Отредактировать профиль"
                             class="profile__edition-button button-effects"></button>
                     </div>
@@ -44,7 +47,9 @@
                 <img class="element__image" src="#" alt="">
                 <div class="element__container">
                     <h2 class="element__title"></h2>
-                    <button type="button" aria-label="Поставить лайк" class="element__icon"></button>
+                    <div class="element__subcontainer"><button type="button" aria-label="Поставить лайк" class="element__icon"></button>
+                    <p class="element__like-counter"></p>
+                    </div>
                 </div>
                 <button type="button" aria-label="Удалить карточку" id="removebutton"
                     class="element__bin button-effects"></button>
@@ -95,6 +100,29 @@
             <img class="popup__image" src="#" alt="Картинка места">
             <p class="popup__caption"></p>
             <button type="button" aria-label="Закрыть картинку" class="popup__close popup__close_type_photo"></button>
+        </div>
+    </div>
+    <div class="popup popup_confirmation">
+        <div class="popup__container">
+            <h2 class="popup__title">Вы уверены?</h2>
+            <button class="popup__submit-button popup__submit-button_type_confirmation" value="confirm"
+            aria-label="Подтвердить удаление карточки">Да</button>
+            <button type="button" aria-label="Закрыть редактирование"
+                class="popup__close popup__close_type_confirmation"></button>
+        </div>
+    </div>
+    <div class="popup popup_avatar-update">
+        <div class="popup__container">
+            <h2 class="popup__title">Обновить аватар</h2>
+            <form class="form form_type_avatar-update" name="avatar-update" novalidate>
+            <input name="updateAvatar" id="avatar" class="form__input-info form__input-info_type_avatar" type="url" value=""
+            placeholder="Ссылка на аватар" required>
+            <span class="form__input-info-error" id="avatar-error"></span>
+            <button type="submit" class="popup__submit-button popup__avatar-update-button" value="Save"
+                        aria-label="Обновить аватар профиля">Сохранить</button>
+            </form>
+            <button type="button" aria-label="Закрыть редактирование"
+                class="popup__close popup__close_type_confirmation"></button>
         </div>
     </div>
 
