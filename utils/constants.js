@@ -6,12 +6,15 @@ export const avatarUpdateButton = document.querySelector('.profile__avatar-conta
 export const userName = document.querySelector('.profile__title');
 export const userDescription = document.querySelector('.profile__subtitle');
 export const userAvatar = document.querySelector('.profile__avatar');
-      //В PopupWithImage.js
-export const popupPhotoSrc = document.querySelector('.popup__image');
-export const popupText = document.querySelector('.popup__caption');
+export const config = {//Конфиг с элементами формы для валидации
+      formSelector: '.form',
+      inputSelector: '.form__input-info',
+      inputSubmitButton: '.popup__submit-button',
+      inputErrorClass: 'form__input-info_error',
+      errorActiveClass: 'form__input-info-error_active',
+      spanErrorClass: '.form__input-info-error'
+    }
       //В utils.js
-export const newPlaceSaveButton = document.querySelector('.popup__submit-button_type_addition');
-export const editionButton = document.querySelector('.popup__submit-button_edition');
 export const formElement = document.querySelector('.form_type_profile');
 export const inputName = formElement.querySelector('.form__input-info_type_name');
 export const inputDescription = formElement.querySelector('.form__input-info_type_description');

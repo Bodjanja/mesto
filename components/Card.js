@@ -1,16 +1,15 @@
-import {confirmationPopup} from '../pages/index.js'
-import {api} from '../pages/index.js'
-
 export class Card { //Создаём класс карточки и абстрактные параметры
-  constructor(cardName, cardLink, templateSelector, handleCardClick, likes, owner, myId, id) {
+  constructor(cardName, cardLink, templateSelector, handleCardClick, likes, owner, userId, id, confirmationPopup, api) {
     this._templateSelector = document.querySelector(templateSelector)
     this._text = cardName
     this._image = cardLink
     this._handleCardClick = handleCardClick
     this._likes = likes
     this._owner = owner
-    this._myId = myId
+    this._myId = userId
     this._id = id
+    this._confirmationPopup = confirmationPopup
+    this._api = api
   }
   _getTemplate() { //Клонируем разметку карточки в DOM-дереве
     const cardElement = this._templateSelector.content.querySelector('.element').cloneNode(true)
@@ -29,7 +28,7 @@ export class Card { //Создаём класс карточки и абстра
     }
 
     this._likes.forEach(card => { //Заполнения сердечка лайка для ранее понравившихся карточек при загрузке страницы
-      if (card._id.includes('6f2db9ebbf34b17236d87430')) {
+      if (card._id.includes(this._myId)) {
         this._element.querySelector('.element__icon').classList.add('element__icon_liked')
       }
     })
@@ -43,20 +42,21 @@ export class Card { //Создаём класс карточки и абстра
 
   _likeCard() { //Функция поставить "нравится" карточке
     const likeButton = this._element.querySelector('.element__icon')
-    likeButton.classList.toggle('element__icon_liked')
     const likesCounter = this._element.querySelector('.element__like-counter')
 //Если класс "liked" есть на кнопке likeButton, то вместе с ним вызываем api и отправляем данные на сервер, а из полученного объекта берём длину массива likes и подставляем цифру в разметку
     if (likeButton.classList.contains('element__icon_liked')) {
-      api.likeCard(this._id)
+      this._api.dislikeCard(this._id)
         .then(result => {
+          likeButton.classList.remove('element__icon_liked')
           likesCounter.textContent = result.likes.length
         })
         .catch((err) => {
           console.log(err)
         }); 
     } else {
-      api.dislikeCard(this._id)
+      this._api.likeCard(this._id)
         .then(result => {
+          likeButton.classList.add('element__icon_liked')
           likesCounter.textContent = result.likes.length
         })
         .catch((err) => {
@@ -75,14 +75,16 @@ export class Card { //Создаём класс карточки и абстра
       this._likeCard()
     })
     this._element.querySelector('#removebutton').addEventListener('click', () => {
-      confirmationPopup.open()
+      this._confirmationPopup.open()
       document.querySelector('.popup__submit-button_type_confirmation').addEventListener('click', () => {
-        api.removeCard(this._id)
+        this._api.removeCard(this._id)
+        .then(result => {
+          this._removeElement(this._element) //Удаление карточки при нажатии на кнопку подтверждения
+          this._confirmationPopup.close()
+        })
         .catch((err) => {
           console.log(err)
         }); 
-        this._removeElement(this._element) //Удаление карточки при нажатии на кнопку подтверждения
-        confirmationPopup.close()
       })
     })
 

@@ -3,7 +3,6 @@ export class Popup {
         this.popupElement = document.querySelector(popupSelector)
         this._handleEscClose = this._handleEscClose.bind(this)
         this.buttonClose = this.popupElement.querySelector('.popup__close')
-        this._formElement = this.popupElement.querySelector('.form')
     }
 
     open() {
@@ -18,7 +17,7 @@ export class Popup {
 
     _handleEscClose(evt) {
         if (evt.key === 'Escape') {
-            this.close(this.popupElement)
+            this.close()
           }
     }
 

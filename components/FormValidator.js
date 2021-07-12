@@ -44,16 +44,10 @@ export class FormValidator {
         errorElement.classList.remove(this._config.errorActiveClass)
     }
 
-    clearErrorsProfile() {//Функция для удаления ошибки валидации при повторном открытии попапа (если при прошлом открытии поля были некорректны)
-        const errorMessages = Array.from(this._formElement.querySelectorAll(this._config.spanErrorClass))
-        const inputsWithError = Array.from(this._formElement.querySelectorAll(this._config.inputSelector))
-        inputsWithError.forEach((item) => {
-            item.classList.remove(this._config.inputErrorClass)
-        })
-        errorMessages.forEach((item) => {
-            item.classList.remove(this._config.errorActiveClass)
-            errorMessages.textContent = ''
-        })
+    resetValidation(){//Функция для удаления ошибки валидации при повторном открытии попапа (если при прошлом открытии поля были некорректны)
+        this._checkButtonState()
+        this._inputList.forEach((inputElement) => {
+            this._hideError(inputElement)})
     }
 
     _hasInvalidInput() {

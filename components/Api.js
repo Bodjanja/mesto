@@ -1,9 +1,14 @@
-import {inputName, inputDescription, inputAvatar, inputPlace, inputImage} from "../utils/constants";
-
 export class Api {
   constructor(data) {
     this._baseUrl = data.baseUrl
     this._token = data.token
+  }
+
+  _checkResponse(res){
+    if (res.ok) {
+      return res.json()
+    }
+    else{return Promise.reject(`Ошибка: ${res.status}`)}
   }
 
   getInitialCards() {//Получить все начальные карточки с сервера для вставки их в разметку
@@ -13,12 +18,7 @@ export class Api {
           'Content-Type': 'application/json'
         }
       })
-      .then(res => {
-        if (res.ok) {
-          return res.json()
-        }
-        else{return Promise.reject(`Ошибка: ${res.status}`)}
-      })
+      .then(this._checkResponse)
   }
 
   getUserData() {//Получить информацию о профиле с сервера для вставки в разметку
@@ -29,15 +29,10 @@ export class Api {
           'Content-Type': 'application/json'
         }
       })
-      .then(res => {
-        if (res.ok) {
-          return res.json()
-        }
-        else{return Promise.reject(`Ошибка: ${res.status}`)}
-      })
+      .then(this._checkResponse)
   }
 
-  editProfileData() {//Отправить отредактированные данные профиля на сервер
+  editProfileData(cardData) {//Отправить отредактированные данные профиля на сервер
     return fetch(`${this._baseUrl}/users/me`, {
         method: 'PATCH',
         headers: {
@@ -45,19 +40,14 @@ export class Api {
           'Content-Type': 'application/json'
         },
         body: JSON.stringify({
-          name: inputName.value,
-          about: inputDescription.value
+          name: cardData.name,
+          about: cardData.description
         })
       })
-      .then(res => {
-        if (res.ok) {
-          return res.json()
-        }
-        else{return Promise.reject(`Ошибка: ${res.status}`)}
-      })
+      .then(this._checkResponse)
   }
 
-  updateProfileAvatar() {//Отправить отредактированный URL аватара на сервер
+  updateProfileAvatar(data) {//Отправить отредактированный URL аватара на сервер
     return fetch(`${this._baseUrl}/users/me/avatar`, {
         method: 'PATCH',
         headers: {
@@ -65,18 +55,13 @@ export class Api {
           'Content-Type': 'application/json'
         },
         body: JSON.stringify({
-          avatar: inputAvatar.value
+          avatar: data.updateAvatar
         })
       })
-      .then(res => {
-        if (res.ok) {
-          return res.json()
-        }
-        else{return Promise.reject(`Ошибка: ${res.status}`)}
-      })
+      .then(this._checkResponse)
   }
 
-  postNewCard() {//Отправить на сервер новую карточку и добавить её в разметку
+  postNewCard(cardData) {//Отправить на сервер новую карточку и добавить её в разметку
     return fetch(`${this._baseUrl}/cards`, {
         method: 'POST',
         headers: {
@@ -84,16 +69,11 @@ export class Api {
           'Content-Type': 'application/json'
         },
         body: JSON.stringify({
-          name: inputPlace.value,
-          link: inputImage.value
+          name: cardData.additionName,
+          link: cardData.additionPhoto
         })
       })
-      .then(res => {
-        if (res.ok) {
-          return res.json()
-        }
-        else{return Promise.reject(`Ошибка: ${res.status}`)}
-      })
+      .then(this._checkResponse)
   }
 
   removeCard(_id){//Удаление карточки на сервере
@@ -104,12 +84,7 @@ export class Api {
         'Content-Type': 'application/json'
       }
     })
-    .then(res => {
-      if (res.ok) {
-        return res.json()
-      }
-      else{return Promise.reject(`Ошибка: ${res.status}`)}
-    })
+    .then(this._checkResponse)
   }
 
   likeCard(_id){
@@ -120,12 +95,7 @@ export class Api {
         'Content-Type': 'application/json'
       }
     })
-    .then(res => {
-      if (res.ok) {
-        return res.json()
-      }
-      else{return Promise.reject(`Ошибка: ${res.status}`)}
-    })
+    .then(this._checkResponse)
   }
 
   dislikeCard(_id){
@@ -136,12 +106,7 @@ export class Api {
         'Content-Type': 'application/json'
       }
     })
-    .then(res => {
-      if (res.ok) {
-        return res.json()
-      }
-      else{return Promise.reject(`Ошибка: ${res.status}`)}
-    })
+    .then(this._checkResponse)
   }
 
 }
