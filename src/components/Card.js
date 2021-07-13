@@ -1,3 +1,5 @@
+import { PopupWithSubmit } from "./PopupWithSubmit"
+
 export class Card { //Создаём класс карточки и абстрактные параметры
   constructor(cardName, cardLink, templateSelector, handleCardClick, likes, owner, userId, id, confirmationPopup, api) {
     this._templateSelector = document.querySelector(templateSelector)
@@ -76,16 +78,16 @@ export class Card { //Создаём класс карточки и абстра
     })
     this._element.querySelector('#removebutton').addEventListener('click', () => {
       this._confirmationPopup.open()
-      document.querySelector('.popup__submit-button_type_confirmation').addEventListener('click', () => {
+      this._confirmationPopup.setupSubmitAction(
+        ()=>{
         this._api.removeCard(this._id)
-        .then(result => {
-          this._removeElement(this._element) //Удаление карточки при нажатии на кнопку подтверждения
-          this._confirmationPopup.close()
-        })
-        .catch((err) => {
-          console.log(err)
-        }); 
+      .then(() => {
+        this._removeElement(this._element) //Удаление карточки при нажатии на кнопку подтверждения
+        this._confirmationPopup.close()
       })
+      .catch((err) => {
+        console.log(err)
+      })})
     })
 
   }

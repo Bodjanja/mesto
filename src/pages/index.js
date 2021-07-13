@@ -9,7 +9,7 @@ import {UserInfo} from '../components/UserInfo.js'
 import {PopupWithImage} from '../components/PopupWithImage.js'
 
 import {buttonOpenPopupProfile, additionPopupOpenButton, avatarUpdateButton, userName, userDescription, userAvatar, config, inputName, inputDescription} from '../utils/constants.js'
-import {Popup} from '../components/Popup.js'
+import {PopupWithSubmit} from '../components/PopupWithSubmit.js'
 
 import {Api} from '../components/Api.js'
 let userId
@@ -98,7 +98,7 @@ additionCardPopup.setEventListeners()
 export const dataTransfer = new UserInfo('.profile__title', '.profile__subtitle', '.profile__avatar')
 
 // -----------------------------------------------
-export const confirmationPopup = new Popup('.popup_confirmation') //Объявление класса попапа подтверждения удаления карточки
+export const confirmationPopup = new PopupWithSubmit('.popup_confirmation') //Объявление класса попапа подтверждения удаления карточки
 confirmationPopup.setEventListeners()
 
 // -----------------------------------------------
