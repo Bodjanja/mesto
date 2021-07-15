@@ -14,5 +14,6 @@ export class UserInfo {
         this._userName.textContent = result.name
         this._userDescription.textContent = result.about
         this._userAvatar.src = result.avatar
+        this._userAvatar.alt = result.name
     }
 }

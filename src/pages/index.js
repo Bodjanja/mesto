@@ -65,11 +65,8 @@ const cardsSection = new Section(
 
   Promise.all([api.getInitialCards(), api.getUserData()]).then(([cards, info]) => {
 //Добавление информации о профиле с сервера
-userName.textContent = info.name
-userDescription.textContent = info.about
-userAvatar.src = info.avatar
-userAvatar.alt = info.name
-userId = info._id
+dataTransfer.setUserInfo(info)
+userId = info._id//Наш уникальный ID
 
 cardsSection.renderAll(cards)//Добавление карточек из массива с сервера
   }).catch((err) => {
