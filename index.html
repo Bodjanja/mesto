@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Место</title>
+<script defer src="main.js"></script><link href="main.css" rel="stylesheet"></head>
+
+<body class="page">
+    <div class="root">
+        <header class="header header_position_align">
+            <a href="#" target="_self"><img class="logo" src="bbe2a6eafac19c3d031c.svg" alt="Логотип"></a>
+        </header>
+
+        <main class="content">
+            <section class="profile">
+                <div class="profile__avatar-container">
+                    <img class="profile__avatar" src="#" alt="">
+                </div>
+                
+                <div class="profile__container">
+                    <div class="profile__subcontainer">
+                        <h1 class="profile__title"></h1>
+                        <p class="profile__subtitle"></p>
+                        <button type="button" aria-label="Отредактировать профиль"
+                            class="profile__edition-button button-effects"></button>
+                    </div>
+                    <button type="button" aria-label="Добавить" id="add"
+                        class="profile__add-button button-effects"></button>
+                </div>
+            </section>
+
+            <section class="elements">
+                <ul class="elements__list">
+                </ul>
+            </section>
+        </main>
+
+        <footer class="footer">
+            <p class="footer__content">&#169; 2020 Mesto Russia</p>
+        </footer>
+
+        <template id="template-element">
+            <li class="element">
+                <img class="element__image" src="#" alt="">
+                <div class="element__container">
+                    <h2 class="element__title"></h2>
+                    <div class="element__subcontainer"><button type="button" aria-label="Поставить лайк" class="element__icon"></button>
+                    <p class="element__like-counter"></p>
+                    </div>
+                </div>
+                <button type="button" aria-label="Удалить карточку" id="removebutton"
+                    class="element__bin button-effects"></button>
+            </li>
+        </template>
+
+    </div>
+    <div class="popup popup_type_profile">
+        <div class="popup__container">
+            <h2 class="popup__title">Редактировать профиль</h2>
+            <form name="edition-form" class="form form_type_profile" novalidate>
+                <fieldset class="form__item">
+                    <input id="username" name="name" type="text" class="form__input-info form__input-info_type_name" value="" required
+                        placeholder="Введите имя" minlength="2" maxlength="40">
+                        <span class="form__input-info-error" id="username-error"></span>
+                    <input id="description" name="description" type="text" value=""
+                        class="form__input-info form__input-info_type_description" required
+                        placeholder="Введите описание" minlength="2" maxlength="200">
+                        <span class="form__input-info-error" id="description-error"></span>
+                    <button type="submit" class="popup__submit-button popup__submit-button_edition" value="Save"
+                        aria-label="Добавить новую информацию профиля">Сохранить</button>
+                </fieldset>
+            </form>
+            <button type="button" aria-label="Закрыть редактирование" class="popup__close popup__close_type_profile"></button>
+        </div>
+    </div>
+    <div class="popup popup_type_addition">
+        <div class="popup__container">
+            <h2 class="popup__title">Новое место</h2>
+            <form class="form form_type_addition" name="addition-form" novalidate>
+                <fieldset class="form__item">
+                    <input id="newplace" name="additionName" class="form__input-info form__input-info_type_place" type="text" value=""
+                        placeholder="Название" required minlength="2" maxlength="30">
+                    <span class="form__input-info-error" id="newplace-error"></span>
+                    <input id="newplaceimg" name="additionPhoto" class="form__input-info form__input-info_type_image" type="url" value=""
+                        placeholder="Ссылка на картинку" required>
+                        <span class="form__input-info-error" id="newplaceimg-error"></span>
+                    <button class="popup__submit-button popup__submit-button_type_addition" type="submit" value="add"
+                        aria-label="Добавить новую информацию с местом">Создать</button>
+                </fieldset>
+            </form>
+            <button type="button" aria-label="Закрыть редактирование"
+                class="popup__close popup__close_type_addition"></button>
+        </div>
+    </div>
+    <div class="popup popup_type_photo">
+        <div class="popup__figurecaption">
+            <img class="popup__image" src="#" alt="Картинка места">
+            <p class="popup__caption"></p>
+            <button type="button" aria-label="Закрыть картинку" class="popup__close popup__close_type_photo"></button>
+        </div>
+    </div>
+    <div class="popup popup_confirmation">
+        <div class="popup__container">
+            <form name="confirmDeleteCard" class="popup__form popup__form_confirmation" novalidate>
+            <h2 class="popup__title">Вы уверены?</h2>
+            <button class="popup__submit-button popup__submit-button_type_confirmation" value="confirm"
+            aria-label="Подтвердить удаление карточки">Да</button>
+            <button type="button" aria-label="Закрыть редактирование"
+                class="popup__close popup__close_type_confirmation"></button>
+            </form>
+        </div>
+    </div>
+    <div class="popup popup_avatar-update">
+        <div class="popup__container">
+            <h2 class="popup__title">Обновить аватар</h2>
+            <form class="form form_type_avatar-update" name="avatar-update" novalidate>
+            <input name="updateAvatar" id="avatar" class="form__input-info form__input-info_type_avatar" type="url" value=""
+            placeholder="Ссылка на аватар" required>
+            <span class="form__input-info-error" id="avatar-error"></span>
+            <button type="submit" class="popup__submit-button popup__avatar-update-button" value="Save"
+                        aria-label="Обновить аватар профиля">Сохранить</button>
+            </form>
+            <button type="button" aria-label="Закрыть редактирование"
+                class="popup__close popup__close_type_confirmation"></button>
+        </div>
+    </div>
+
+</body>
+
+</html>
